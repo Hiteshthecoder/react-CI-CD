@@ -20,18 +20,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # - name: Create build
-      #   run: npm run build
+      - name: Create build
+        run: npm run build
 
-      # - name: Create artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: react-build
-      #     path: dist
-      #     retention-days: 7
+      - name: Create artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path: dist
+          retention-days: 7
       
       - name: install vercel
         run: npm i -g vercel
       
-      - name: deploy project to vercel
-        run: vercel --prod --yes --token=${{secrets.VERCEL_SECRET}}
+      # - name: deploy project to vercel
+      #   run: vercel --prod --yes --token=${{secrets.VERCEL_SECRET}}
+
+      - name: directly deploy project to vercel
+        run: vercel deploy dist --prod --yes --token=${{secrets.VERCEL_SECRET}}
